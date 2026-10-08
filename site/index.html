@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>小东西 · 汇总</title>
+
+<meta name="description" content="这里放我做过的、能打开、能跑、有文档的小东西。">
+<meta property="og:title" content="小东西 · 汇总">
+<meta property="og:description" content="这里放我做过的、能打开、能跑、有文档的小东西。">
+<meta property="og:type" content="website">
+
+<!-- 内联 SVG 图标，避免一次额外请求 -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b1220'/%3E%3Cpath d='M9 21V11h3.2l3.8 6 3.8-6H23v10h-2.6v-5.6L17 20h-2l-3.4-4.6V21z' fill='%23e8eefc'/%3E%3C/svg%3E">
+
+<style>
+  :root{
+    --bg:#f6f8fc; --fg:#101828; --dim:#5a6b88; --card:#ffffff;
+    --line:#e4e9f2; --accent:#2456d6; --accent-soft:#e8efff;
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0b1220; --fg:#e8eefc; --dim:#93a4c6; --card:#131e35;
+      --line:#25334f; --accent:#8fb0ff; --accent-soft:#1b2942;
+    }
+  }
+  *{ box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; }
+  body{
+    margin:0; background:var(--bg); color:var(--fg);
+    font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",
+         "PingFang SC","Microsoft YaHei",sans-serif;
+    padding:clamp(20px,5vw,72px) clamp(16px,5vw,32px);
+  }
+  .wrap{ max-width:44rem; margin:0 auto; }
+
+  header{ padding-bottom:clamp(20px,4vw,36px); border-bottom:1px solid var(--line); }
+  h1{
+    font-size:clamp(1.6rem,4.6vw,2.2rem); line-height:1.25;
+    margin:0 0 .5em; letter-spacing:-.01em;
+  }
+  .lead{ margin:0; color:var(--dim); font-size:clamp(.95rem,2.4vw,1.05rem); }
+
+  main{ padding-top:clamp(20px,4vw,36px); }
+  ul.items{ list-style:none; margin:0; padding:0; display:grid; gap:14px; }
+
+  .item{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:clamp(14px,3vw,20px);
+    transition:border-color .15s ease, transform .15s ease;
+  }
+  .item:hover{ border-color:var(--accent); }
+  .item:focus-within{ border-color:var(--accent); }
+
+  .item h2{ font-size:1.06rem; margin:0 0 .35em; line-height:1.4; }
+  .item h2 a{ color:var(--fg); text-decoration:none; }
+  .item h2 a:hover{ color:var(--accent); }
+  .item h2 a::after{ content:" ↗"; color:var(--dim); font-size:.85em; }
+
+  .item p{ margin:0; color:var(--dim); font-size:.94rem; }
+  .item p + p{ margin-top:.45em; }
+
+  .tags{ display:flex; flex-wrap:wrap; gap:6px; margin-top:.7em; }
+  .tag{
+    font-size:.76rem; line-height:1; padding:.4em .6em; border-radius:999px;
+    background:var(--accent-soft); color:var(--accent); white-space:nowrap;
+  }
+
+  .todo{
+    border-style:dashed; border-color:var(--line); background:transparent;
+  }
+  .todo h2 a{ color:var(--dim); pointer-events:none; }
+  .todo h2 a::after{ content:""; }
+
+  footer{
+    margin-top:clamp(28px,6vw,52px); padding-top:clamp(16px,3vw,24px);
+    border-top:1px solid var(--line); color:var(--dim); font-size:.88rem;
+  }
+  footer p{ margin:0 0 .5em; }
+  code{
+    font:.86em/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    background:var(--accent-soft); color:var(--accent);
+    padding:.15em .4em; border-radius:5px;
+  }
+
+  a:focus-visible, .item:focus-within{ outline:2px solid var(--accent); outline-offset:3px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>小东西 · 汇总</h1>
+    <p class="lead">
+      这里放我做过的、能打开、能跑、有文档的小东西。<br>
+      大多是中小型站点规模的东西：静态站、脚本、网关、爬虫。
+    </p>
+  </header>
+
+  <main>
+    <ul class="items">
+
+      <li class="item">
+        <h2><a href="https://github.com/a1513902980-design/relay-egress" target="_blank" rel="noopener">relay-egress · 转接出口</a></h2>
+        <p>本机只负责渲染，浏览器发出的<strong>每一个</strong>请求都从自己的 VPS 出去；目标站点看到的是 VPS 的 IP。</p>
+        <p>和常见代理模式的区别不在功能，在结构：<strong>直连的代码路径不存在</strong>——上游不是回环地址就拒绝启动；隧道断了请求直接失败，源码里没有"回退直连"这条分支。不动系统代理、证书库、防火墙、驱动。</p>
+        <div class="tags">
+          <span class="tag">Node 内置模块 · 零依赖</span>
+          <span class="tag">出口身份对照</span>
+          <span class="tag">进程出网审计</span>
+          <span class="tag">Windows / Linux / macOS</span>
+        </div>
+      </li>
+
+      <li class="item">
+        <h2><a href="https://github.com/a1513902980-design/prompt/tree/main/agent-workflow" target="_blank" rel="noopener">agent-workflow · 多会话工作站的实现原则</a></h2>
+        <p>把一次真实的多 agent 协作里学到的东西写成了十一条原则，<strong>每一条都带一个踩过的坑当出处</strong>，外加四个角色的 skill（对接／指挥／员工／监管）。</p>
+        <p>重点不在"怎么用"，在<strong>"我们试过会漏，所以不许这么干"</strong>——比如：报"完成"不算完成，要先查它该写的东西在不在；只读产物、不读关于产物的说法。</p>
+        <div class="tags">
+          <span class="tag">纯文本 · 无依赖</span>
+          <span class="tag">11 条原则 · 条条有出处</span>
+          <span class="tag">4 个角色 skill</span>
+          <span class="tag">两轮实测记录</span>
+        </div>
+      </li>
+
+      <!-- ★ 下面一张是【占位】，等你加下一样东西时替换掉。 -->
+      <li class="item todo">
+        <h2><a href="#">（待补 · 爬虫）</a></h2>
+        <p>一句话：它解决什么问题。</p>
+        <div class="tags"><span class="tag">技术栈</span></div>
+      </li>
+      <!-- ★ 占位到此为止 -->
+
+    </ul>
+  </main>
+
+  <footer>
+    <p>
+      <strong>本页本身也算一件：</strong>单个 HTML 文件，<strong>没有 JavaScript</strong>，
+      <strong>不加载任何外部资源</strong>——字体、图标都不外链（图标是内联 SVG）。
+      深浅色跟随系统。页面上指向外部的只有一个超链接，那是链接，不是加载。查看源码即可核对。
+    </p>
+    <p>托管在 Cloudflare Pages，地址是 <code>*.pages.dev</code>，没有买域名。</p>
+  </footer>
+
+</div>
+</body>
+</html>
