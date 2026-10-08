@@ -1,0 +1,23 @@
+作品集
+================================================
+relay-egress\   ←「转接模式」成品包（11 个文件，**已改为免费发布**）
+
+看哪一份：
+- 它是什么、怎么装   → relay-egress\README.md（第十节是「授权」）
+- 结论是不是真的     → relay-egress\证据_20261006.md（实测记录 + 局限声明）
+- 授权条款           → relay-egress\LICENSE.txt（「转接模式免费许可 1.0」正式版）
+- 不用 Windows 的    → relay-egress\Linux或Mac_三行命令.txt
+
+已发布：github.com/a1513902980-design/relay-egress
+提交 06a4917（2026-10-08「改为免费发布」）；部署密钥已配好，可再次推送
+⚠ 仓库**已公开**（2026-10-08 实测：匿名 api.github.com 返回 `private=false` / `visibility=public`）
+  任何人可打开 https://github.com/a1513902980-design/relay-egress ｜ 内容 = 提交 06a4917（11 个文件，已与本地逐字节核对一致）
+
+其它（不属于 relay-egress）：
+- agent workflow实现基本原则和架构\   ← 四角色 skill 包（给 agent 工作站用，与 VPS 那条线无关）
+- 给别的模型用的技术包_20261006\      ← context-os / flash-executor 两份 skill + 脚本（旧副本）
+- 待办_发布前.md                      ← relay-egress 发布前清单（文本项已完成，见文末记录）
+
+内容口径：包里不含任何凭据；真实 IP 已掩码（文档里的 203.0.113.x 是保留段示例）。
+本文件夹是副本，原件在
+D:\.orkas\userWorkSpace\chat-2026-10-05-1\远程工作站_工作流\out\dist\relay-egress
