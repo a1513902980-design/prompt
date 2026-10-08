@@ -1,0 +1,12 @@
+{
+  // Cloudflare Worker 的静态资源配置。
+  // 这个文件就是 Worker 那边的「build output directory」——
+  // Worker 不靠面板上的目录字段，靠 assets.directory 说明静态文件在哪。
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "prompt",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./site",
+    "not_found_handling": "404-page"
+  }
+}
